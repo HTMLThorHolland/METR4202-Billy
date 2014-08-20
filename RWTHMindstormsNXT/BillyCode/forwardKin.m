@@ -1,4 +1,4 @@
-function [ z0, x0, y0 ] = Prima( theta1, theta2, theta3 )
+function [ z0, x0, y0 ] = forwardKin( theta1, theta2, theta3 )
 
 % Load the parameters
 parameters;

@@ -3,7 +3,8 @@ function valid = runMotor(degrees)
     degx = degrees(1,1);
     degy = degrees(1,2);
     degz = degrees(1,3);
-
+    
+   
 
     % Undo negatives and assign them to speeds
     if(degx < 0)
@@ -22,18 +23,37 @@ function valid = runMotor(degrees)
         speed3 = 40;
     end
     
+    
+    % Break if there are any imaginary components (and therefore is not a
+    % valid move to position to
+    if (~isreal(degx))||(~isreal(degy))||(~isreal(degz))
+        error('One of the moves is not valid');
+    end
+
+    disp(degx/5);
+    disp(degy/5);
+    disp(degz/5);
+        
     % Round the numbers to only input integers to NXC_MotorControl as
     % required
-    degx = int64(degx);
-    degy = int64(degy);
-    degz = int64(degz);
+    degx = uint64(abs(degx));
+    degy = uint64(abs(degy));
+    degz = uint64(abs(degz));
     
-    % Run all three motors to each degree
-    NXC_MotorControl(0,speed1,degx, false,'Brake',true);
-    NXC_MotorControl(1,speed2,degy, false,'Brake',true);
-    NXC_MotorControl(2,speed3,degz, false,'Brake',true);
+    
+    
+    str = input('Do you want to run with these angles?','s');
+    
+    if strcmp(str,'yes')
+    
+        % Run all three motors to each degree
+        NXC_MotorControl(0,speed1,degx, false,'Brake',true);
+        NXC_MotorControl(1,speed2,degy, false,'Brake',true);
+        NXC_MotorControl(2,speed3,degz, false,'Brake',true);
 
-    valid  = 1;
-
+        valid  = 1;
+    else
+        return
+    end
 end
 
