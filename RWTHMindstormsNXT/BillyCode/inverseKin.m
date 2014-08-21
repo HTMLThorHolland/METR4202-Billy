@@ -17,8 +17,10 @@ end
 parameters;
 
 L3 = sqrt(L2^2 - Cx^2);
-Ay = -60.5;
-PCy= Cy - 20;
+
+
+Ay = -Ra;
+PCy= Cy - Rb;
 dn = (L1 + sqrt(L2^2 - (Ay - PCy)^2));
 
 if (abs(Z) <= dn)
