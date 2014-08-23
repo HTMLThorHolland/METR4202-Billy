@@ -59,7 +59,9 @@ function [intendedpos] = runNXT (points)
         moveangles = intendedpos - currentpos;
                 
         % Run the movement
-        runMotor(-moveangles);
+        runMotor(-moveangles,h);
+        
+        
         
         w1 = NXT_GetOutputState(0,h);
         w2 = NXT_GetOutputState(1,h);
