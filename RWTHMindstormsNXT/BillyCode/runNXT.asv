@@ -2,6 +2,7 @@ function [intendedpos] = runNXT (points)
     % Beginning point is to get a reference from the starting point as all
     % encoders default to 0 when the NXT is turned on
     beginz = -320;
+
     % Reorder points via calculation of shortest path at each step. This is
     % essentially djikstra's algorithm in this case because we have every
     % point fully connected to every other point (there is no limit to
@@ -42,33 +43,16 @@ function [intendedpos] = runNXT (points)
         
         % Pass handle to get the current rotation counters of each motor in
         % a 1x3 array
-        w1 = NXT_GetOutputState(0,h);
-        w2 = NXT_GetOutputState(1,h);
-        w3 = NXT_GetOutputState(2,h);
-        r1 = w1.RotationCount;
-        r2 = w2.RotationCount;
-        r3 = w3.RotationCount;
-        
-        currentpos = [r1 r2 r3];
-        %[currentpos(1), currentpos(2), currentpos(3)] = getRTC(h);
+        currentpos = getRTC(h);
         disp(currentpos);
       
         
         % Minus currentpos from intended pos to get the relative movement
         % required
         moveangles = intendedpos - currentpos;
-                
+        
         % Run the movement
         runMotor(-moveangles);
-        
-        w1 = NXT_GetOutputState(0,h);
-        w2 = NXT_GetOutputState(1,h);
-        w3 = NXT_GetOutputState(2,h);
-        r1 = w1.RotationCount;
-        r2 = w2.RotationCount;
-        r3 = w3.RotationCount;
-
-        disp([r1, r2, r3]);
         
         j= j+1;
     end

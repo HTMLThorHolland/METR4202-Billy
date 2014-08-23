@@ -30,8 +30,8 @@ function valid = runMotor(degrees)
         error('One of the moves is not valid');
     end
     
-    
-    disp(degx/5);
+    degx = degx
+    disp(degx);
     disp(degy/5);
     disp(degz/5);
         

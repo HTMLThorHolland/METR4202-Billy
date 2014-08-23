@@ -1,4 +1,6 @@
-function [theta] = inverseKin (X, Y, Z, motorpos)
+function theta = inverseKin (X, Y, Z, motorpos)
+
+theta = 0;
 
 if (motorpos == 0)
     Cx=X;
