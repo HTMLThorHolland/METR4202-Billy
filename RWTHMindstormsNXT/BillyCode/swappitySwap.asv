@@ -1,0 +1,26 @@
+function [x,y,z,speed1,speed2,speed3] = swappitySwap(degrees)
+    
+    degx = degrees(1,;
+    if(degx < 0)
+        speed1 = -40;
+        %degx = -int16(degx);
+    else
+        speed1 = 40;
+    end
+    if(degy < 0)
+        speed2 = -40;
+        %degy = -int16(degy);
+    else 
+        speed2 = 40;
+    end
+    if(degz < 0)
+        speed3 = -40;
+        %degz = -int16(degz);
+    else
+        speed3 = 40;
+    end
+    
+    x = uint16(abs(degx));
+    y = uint16(abs(degy));
+    z = uint16(abs(degz));
+end

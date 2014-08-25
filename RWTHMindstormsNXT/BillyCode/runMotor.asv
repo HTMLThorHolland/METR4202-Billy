@@ -35,22 +35,22 @@ function runMotor(degrees, h,intendedpos)
     %degy = uint16(abs(degy));
     %degz = uint16(abs(degz));
     
-    if degx < 1
-        degx = 1;
-    end
-    if degy < 1
-        degy = 1;
-    end
-    if degz < 1
-        degz = 1;
-    end
+    %if degx < 0.01
+    %    degx = 0.01;
+    %end
+    %if degy < 0.01
+    %    degy = 0.01;
+    %end
+    %if degz < 0.01
+    %    degz = 0.01;
+    %end
         
     
     
     str = input('Do you want to run with these angles?','s');
     
     if strcmp(str,'yes')
-    %if strcmp('yes','yes')
+    
         mA = NXTMotor('A','Power',speed1,'TachoLimit',degx,'ActionAtTachoLimit','HoldBrake','SpeedRegulation',false);
         mB = NXTMotor('B','Power',speed2,'TachoLimit',degy,'ActionAtTachoLimit','HoldBrake','SpeedRegulation',false);
         mC = NXTMotor('C','Power',speed3,'TachoLimit',degz,'ActionAtTachoLimit','HoldBrake','SpeedRegulation',false);
@@ -63,29 +63,26 @@ function runMotor(degrees, h,intendedpos)
         disp('currentpos');
         [posx posy posz] = getRTC(h);
         disp([posx posy posz]);
-        %disp([degxtemp degytemp degztemp]);
+        disp([degxtemp degytemp degztemp]);
+        intendedpos(1,1) - degxtemp;
         
-        
-        if((abs(posx - intendedpos(1,1)) > 1)||(abs(posy - intendedpos(1,2)) > 1)||(abs(posy - intendedpos(1,3)) > 1))
+        if((abs(posx - degxtemp) > 1)||(abs(posy - degytemp) > 1)||(abs(posy - degytemp) > 1))
             disp('inaccuratestatement');
-            [degx2,degy2,degz2,speed1,speed2,speed3] = swappitySwap([(posx - intendedpos(1,1)) (posy - intendedpos(1,2)) (posz - intendedpos(1,3))]);
+            [degx2,degy2,degz2,speed1,speed2,speed3] = swappitySwap([(posx - degxtemp) (posx - degxtemp) (posx - degxtemp)]);
             mA.TachoLimit = degx2;
             mB.TachoLimit = degy2;
             mC.TachoLimit = degz2;
-            mA.Power = -speed1;
-            mB.Power = -speed2;
-            mC.Power = -speed3;
+            mA.Power = speed1;
+            mB.Power = speed2;
+            mC.Power = speed3;
             if degx2 ~= 0
                 mA.SendToNXT();
-                disp('mA adjusted');
             end
             if degy2 ~= 0
                 mB.SendToNXT();
-                disp('mB adjusted');
             end
             if degz2 ~= 0
                 mC.SendToNXT();
-                disp('mC adjusted');
             end
             mA.WaitFor();
             mB.WaitFor();

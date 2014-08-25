@@ -7,10 +7,10 @@ function runNXT (points)
     % point fully connected to every other point (there is no limit to
     % where we can move from one to another). Because of this, Prim's
     % algorithm also has no computational benefit over djikstra's
-    %newpoints = primsAlg(points);
-    %newpoints  = [newpoints;[0 0 0]];
-    %disp(newpoints);
-    newpoints = points;
+    newpoints = primsAlg(points);
+    newpoints  = [newpoints;[0 0 0]];
+    disp(newpoints);
+    %newpoints = points;
     %disp(newpoints);
     
     % Connect to NXT and grab the handle
@@ -37,13 +37,11 @@ function runNXT (points)
         %degx = inverseKin(x,y,z+beginz,0);
         %degy = inverseKin(x,y,z+beginz,120);
         %degz = inverseKin(x,y,z+beginz,-120);
-        R = [1 1; 1 1];
-        R = [cos(0.453) -sin(0.453); sin(0.453) cos(0.453)];
+        R = [cos(0.4084) -sin(0.4084); sin(0.4084) cos(0.4084)];
         X = [x;y];
         X = R * X;
-        %X = X.*(96/(96-12));
         
-        [ang1 ang2 ang3] = delta_calcInverse(X(1,1),X(2,1),z+beginz);
+        [ang1 ang2 ang3] = delta_calcInverse(x,y,z+beginz);
         %intendedpos = [ang1 ang2 ang3];
         %disp(intendedpos);
         intendedpos = -[(ang1-60.2668)*5 (ang2-60.2668)*5 (ang3-60.2668)*5]; % *5 to account for gearing down

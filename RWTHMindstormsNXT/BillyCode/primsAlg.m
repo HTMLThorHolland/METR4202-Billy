@@ -26,7 +26,7 @@ function ordered  = primsAlg(points)
         istore = 0;
         % Just throw minDist as something large that would never be reached
         % initially
-        minDist = 100;
+        minDist = 10000;
         % Extract the x and y co-ordinates
         x1 = ordered(o,1);
         y1 = ordered(o,2);

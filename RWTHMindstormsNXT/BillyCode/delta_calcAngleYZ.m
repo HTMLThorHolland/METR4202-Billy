@@ -1,5 +1,6 @@
 function theta = delta_calcAngleYZ(x0, y0, z0)
     parameters2;
+    %theta = false;
     y1 = -0.5 * 0.57735 * f; %// f/2 * tg 30
     y0 = y0 - 0.5 * 0.57735 * e;   % // shift center to edge
     %// z = a + b*y
