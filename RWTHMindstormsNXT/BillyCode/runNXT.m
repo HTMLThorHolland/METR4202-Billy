@@ -1,7 +1,7 @@
 function runNXT (points)
     % Beginning point is to get a reference from the starting point as all
     % encoders default to 0 when the NXT is turned on
-    beginz = -320;
+    beginz = -336; %-320;
     % Reorder points via calculation of shortest path at each step. This is
     % essentially djikstra's algorithm in this case because we have every
     % point fully connected to every other point (there is no limit to
@@ -46,7 +46,7 @@ function runNXT (points)
         [ang1 ang2 ang3] = delta_calcInverse(X(1,1),X(2,1),z+beginz);
         %intendedpos = [ang1 ang2 ang3];
         %disp(intendedpos);
-        intendedpos = -[(ang1-60.2668)*5 (ang2-60.2668)*5 (ang3-60.2668)*5]; % *5 to account for gearing down
+        intendedpos = -[(ang1-60.7)*5 (ang2-60.7)*5 (ang3-60.7)*5]; % *5 to account for gearing down
        
         
         % Pass handle to get the current rotation counters of each motor in
