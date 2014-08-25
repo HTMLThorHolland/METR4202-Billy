@@ -1,4 +1,4 @@
-function points2billycoords(givenpoints)
+function [billypoints] = points2billycoords(givenpoints)
     %this function converts the output of Lab1RandLocations to usable
     %Billy coordinates
     l1 = size(givenpoints);
@@ -8,5 +8,5 @@ function points2billycoords(givenpoints)
         givenpoints(j,2) = 32*(givenpoints(j,2)-3.5);
         givenpoints(j,3) = 20*(givenpoints(j,3));
     end
-    disp(givenpoints);
+    billypoints = givenpoints;
 end

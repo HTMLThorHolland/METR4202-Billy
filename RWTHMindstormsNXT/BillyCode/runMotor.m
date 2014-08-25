@@ -45,7 +45,9 @@ function runMotor(degrees, h,intendedpos)
         degz = 1;
     end
         
-    
+    disp(degx/5);
+    disp(degy/5);
+    disp(degz/5);
     
     str = input('Do you want to run with these angles?','s');
     
