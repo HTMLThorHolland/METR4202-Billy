@@ -56,9 +56,9 @@ function runNXT (points)
         z = newpoints(j,3);
         
         if x > 0
-            x = x + x*(20/160) - 3;
+            x = x + x*(16/160) - 3;
         else
-            x = x+x*(20/160);
+            x = x+x*(16/160);
         end
         y = y+y*(7/96);
         
@@ -91,8 +91,8 @@ function runNXT (points)
         currentpos = [r1 r2 r3];
         %[currentpos(1), currentpos(2), currentpos(3)] = getRTC(h);
         
-        %disp('intendedpos');
-        %disp(intendedpos);
+        disp('intendedpos');
+        disp(intendedpos);
         
         % Minus currentpos from intended pos to get the relative movement
         % required
@@ -101,7 +101,7 @@ function runNXT (points)
         % Run the movement
         if temp == 3
             runMotor(moveangles,h,intendedpos,0);
-            temp = 1;
+            temp = ;
         else
             runMotor(moveangles,h,intendedpos,1);
             temp = temp + 1;

@@ -1,4 +1,4 @@
-function runMotor(degrees, h,intendedpos)
+function runMotor(degrees, h,intendedpos,correct)
     
     degx = degrees(1,1);
     degy = degrees(1,2);
@@ -68,7 +68,7 @@ function runMotor(degrees, h,intendedpos)
         %disp([degxtemp degytemp degztemp]);
         
         
-        if((abs(posx - intendedpos(1,1)) > 1)||(abs(posy - intendedpos(1,2)) > 1)||(abs(posy - intendedpos(1,3)) > 1))
+        if(((abs(posx - intendedpos(1,1)) > 1)||(abs(posy - intendedpos(1,2)) > 1)||(abs(posy - intendedpos(1,3)) > 1))&&correct)
             disp('inaccuratestatement');
             [degx2,degy2,degz2,speed1,speed2,speed3] = swappitySwap([(posx - intendedpos(1,1)) (posy - intendedpos(1,2)) (posz - intendedpos(1,3))]);
             mA.TachoLimit = degx2;

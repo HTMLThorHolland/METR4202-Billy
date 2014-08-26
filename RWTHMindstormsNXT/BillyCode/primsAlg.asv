@@ -2,7 +2,7 @@
 function ordered  = primsAlg(points)
 % This function takes a 1xN array of points in the form [x1 y1 z1 x2 y2 z2] 
 % returns the same array of points reordered to the optimal path
-    disp(points);
+    
     points = transpose(points);
     points = points(:);
     points = transpose(points);
