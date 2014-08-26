@@ -46,7 +46,7 @@ function runNXT (points)
         [ang1 ang2 ang3] = delta_calcInverse(X(1,1),X(2,1),z+beginz);
         %intendedpos = [ang1 ang2 ang3];
         %disp(intendedpos);
-        intendedpos = -[(ang1-60.7)*5 (ang2-60.7)*5 (ang3-60.7)*5]; % *5 to account for gearing down
+        intendedpos = -[(ang1-60.8664)*5 (ang2-60.8664)*5 (ang3-60.8664)*5]; % *5 to account for gearing down
        
         
         % Pass handle to get the current rotation counters of each motor in
