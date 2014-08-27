@@ -7,7 +7,7 @@ function runMotor(degrees, h,intendedpos,correct)
     %disp(degx/5);
     %disp(degy/5);
     %disp(degz/5);
-    disp([degx/5 degy/5 degz/5]);
+
     
     degxtemp = int16(degx);
     degytemp = int16(degy);
@@ -23,7 +23,7 @@ function runMotor(degrees, h,intendedpos,correct)
     end
     
     
-    
+    disp([degx/5 degy/5 degz/5]);
     %disp(degy/5);
     %disp(degz/5);
     
@@ -63,13 +63,13 @@ function runMotor(degrees, h,intendedpos,correct)
         mB.WaitFor(2);
         mC.WaitFor(2);
         %disp('currentpos');
-        [posx posy posz] = getRTC(h);
-        %disp([posx posy posz]);
+        %[posx posy posz] = getRTC(h);
+        disp([posx posy posz]);
         %disp([degxtemp degytemp degztemp]);
         
         
         if(((abs(posx - intendedpos(1,1)) > 1)||(abs(posy - intendedpos(1,2)) > 1)||(abs(posy - intendedpos(1,3)) > 1))&&(correct > 0))
-            %disp('inaccuratestatement');
+            disp('inaccuratestatement');
             [degx2,degy2,degz2,speed1,speed2,speed3] = swappitySwap([(posx - intendedpos(1,1)) (posy - intendedpos(1,2)) (posz - intendedpos(1,3))]);
             mA.TachoLimit = degx2;
             mB.TachoLimit = degy2;
@@ -79,15 +79,15 @@ function runMotor(degrees, h,intendedpos,correct)
             mC.Power = -speed3;
             if degx2 ~= 0
                 mA.SendToNXT();
-                %disp('mA adjusted');
+                disp('mA adjusted');
             end
             if degy2 ~= 0
                 mB.SendToNXT();
-                %disp('mB adjusted');
+                disp('mB adjusted');
             end
             if degz2 ~= 0
                 mC.SendToNXT();
-                %disp('mC adjusted');
+                disp('mC adjusted');
             end
             mA.WaitFor(1);
             mB.WaitFor(1);
@@ -96,33 +96,33 @@ function runMotor(degrees, h,intendedpos,correct)
             disp('Corrected position:')
             disp([posx posy posz]);
             %disp([posx posy posz]);
-%             if(correct == 2)
-%                 disp('inaccuratestatement2');
-%                 [degx2,degy2,degz2,speed1,speed2,speed3] = swappitySwap([(posx - intendedpos(1,1)) (posy - intendedpos(1,2)) (posz - intendedpos(1,3))]);
-%                 mA.TachoLimit = degx2;
-%                 mB.TachoLimit = degy2;
-%                 mC.TachoLimit = degz2;
-%                 mA.Power = -speed1;
-%                 mB.Power = -speed2;
-%                 mC.Power = -speed3;
-%                 if degx2 ~= 0
-%                     mA.SendToNXT();
-%                     disp('mA adjusted2');
-%                 end
-%                 if degy2 ~= 0
-%                     mB.SendToNXT();
-%                     disp('mB adjusted2');
-%                 end
-%                 if degz2 ~= 0
-%                     mC.SendToNXT();
-%                     disp('mC adjusted2');
-%                 end
-%                 mA.WaitFor(1);
-%                 mB.WaitFor(1);
-%                 mC.WaitFor(1);
-%                 [posx posy posz] = getRTC(h);
-%                 disp([posx posy posz]);
-%             end
+            if(correct == 2)
+                disp('inaccuratestatement2');
+                [degx2,degy2,degz2,speed1,speed2,speed3] = swappitySwap([(posx - intendedpos(1,1)) (posy - intendedpos(1,2)) (posz - intendedpos(1,3))]);
+                mA.TachoLimit = degx2;
+                mB.TachoLimit = degy2;
+                mC.TachoLimit = degz2;
+                mA.Power = -speed1;
+                mB.Power = -speed2;
+                mC.Power = -speed3;
+                if degx2 ~= 0
+                    mA.SendToNXT();
+                    disp('mA adjusted2');
+                end
+                if degy2 ~= 0
+                    mB.SendToNXT();
+                    disp('mB adjusted2');
+                end
+                if degz2 ~= 0
+                    mC.SendToNXT();
+                    disp('mC adjusted2');
+                end
+                mA.WaitFor(1);
+                mB.WaitFor(1);
+                mC.WaitFor(1);
+                [posx posy posz] = getRTC(h);
+                disp([posx posy posz]);
+            end
         end
         % Run all three motors to each degree
         %NXC_MotorControl(0,speed1,degx, false,'Brake',true);
