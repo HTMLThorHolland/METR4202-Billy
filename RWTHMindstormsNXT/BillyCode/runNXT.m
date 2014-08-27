@@ -14,7 +14,7 @@ function runNXT (points,numtimes)
         newpoints = [newpoints;newpoints1];
     end
     newpoints = points2billycoords(newpoints);
-    newpoints = [newpoints;[0 0 123];[0 0 123]];
+    newpoints = [newpoints;[0 0 115];[0 0 125]];
     %disp(newpoints);
     %newpoints = points;
     [m,n] = size(newpoints);
@@ -23,8 +23,8 @@ function runNXT (points,numtimes)
         
         y = newpoints(i,:);
         y(1,3) = y(1,3)+50;
-        if y(1,3) > 123
-            y(1,3) = 123;
+        if y(1,3) > 125
+            y(1,3) = 125;
         end
         newpoints2 = [newpoints2;y];
         newpoints2 = [newpoints2;newpoints(i,:)];
@@ -78,9 +78,13 @@ function runNXT (points,numtimes)
         y = y - (-0.009375*y + 0.25)*6.979*(1.0093^x);
         
         if x > 0
-            x = x + 4;
+            x = x + 3 + 3*(x)/80;
+        elseif 0 > x > -32
+            if y < -32
+                x = x - ((y/80)*12 + 4);
+            end
         elseif x < -32;
-            x = x + (x + 32)*(5/32);
+            x = x + (x + 32)*(6/32);
         end
         %if((x > 0)&&(y<0))
         %    z = z + 10;
